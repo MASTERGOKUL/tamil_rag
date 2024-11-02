@@ -6,7 +6,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.runnables import RunnableLambda
 from langchain_core.prompt_values import StringPromptValue 
 from langchain_core.prompt_values import ChatPromptValue
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 
 title="ஜெயகாந்தனின்  சிறுகதைகள் -  தொகுப்பு - 1"
