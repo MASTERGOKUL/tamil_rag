@@ -6,14 +6,29 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.runnables import RunnableLambda
 from langchain_core.prompt_values import StringPromptValue 
 from langchain_core.prompt_values import ChatPromptValue
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
+from gradio_client import Client
+client = Client("yuntian-deng/ChatGPT4Turbo")
+import time
+
+def time_decorator(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"Execution time of {func.__name__}: {execution_time:.4f} seconds")
+        return result
+    return wrapper
 
 title="ஜெயகாந்தனின்  சிறுகதைகள் -  தொகுப்பு - 1"
-db_folder ="../vectordbs/content/"
+db_folder ="/workspaces/tamil_rag/vectordbs/content/"
 embedding_model = "l3cube-pune/tamil-sentence-bert-nli"
 vectordb = Chroma(persist_directory=f"{db_folder}{title}", embedding_function=HuggingFaceEmbeddings(model_name=embedding_model))
+print(vectordb._collection.count())
 
+@time_decorator
 def prepare_input(prompt_value):
     if isinstance(prompt_value,StringPromptValue):
         return str(prompt_value.text)
@@ -22,10 +37,12 @@ def prepare_input(prompt_value):
         messages = [f"{msg.content}" for msg in prompt_value.messages]
         return "\n".join(messages)  
     
-def gradio_predict(inputs):
-    from gradio_client import Client
 
-    client = Client("yuntian-deng/ChatGPT4Turbo")
+@time_decorator
+def gradio_predict(inputs):
+    # global counter
+    # counter += 1
+    # print("counter : ",counter)
     print(type(inputs))
     inputs = prepare_input(inputs)
     print("input\n",inputs)
@@ -37,8 +54,10 @@ def gradio_predict(inputs):
         chatbot=[],
         api_name="/predict"
     )
-    print("output\n",result[0][0][-1])
-    return result[0][0][-1]
+    
+    print("\n\n\n\n",result,"\n\n\n\n")
+    print("output\n",result[0][-1][-1])
+    return result[0][-1][-1]
 
 gradio_runnable = RunnableLambda(lambda inputs: str(gradio_predict(inputs)))
 
@@ -64,7 +83,7 @@ retriever_tamil = MultiQueryRetriever.from_llm(
     prompt=QUERY_PROMPT_TAMIL
 )
 
-
+@time_decorator
 def inspect(state):
     """Print the state passed between Runnables in a langchain and pass it on"""
     print("state :\n",state) # {'context': [Document(metadata={}, page_content='எபி. 6:..'),..}
@@ -74,7 +93,7 @@ def inspect(state):
     state['context'] = "\n".join(content)
     print(state['context'])
     return state
-
+@time_decorator
 def get_answer(question):
   template_tamil = """
   உங்களுக்கு கொடுக்கப்பட்டுள்ள உள்ளடக்கத்தை மட்டுமே பயன்படுத்தி கேள்விக்கு பதிலளியுங்கள். 
