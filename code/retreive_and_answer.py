@@ -1,11 +1,13 @@
 from langchain.prompts import ChatPromptTemplate, PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
 from langchain_huggingface import HuggingFaceEndpoint
 from langchain.retrievers.multi_query import MultiQueryRetriever
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.runnables import RunnableLambda
 from langchain_core.prompt_values import StringPromptValue 
 from langchain_core.prompt_values import ChatPromptValue
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
 
 title="ஜெயகாந்தனின்  சிறுகதைகள் -  தொகுப்பு - 1"
 db_folder ="../vectordbs/content/"
