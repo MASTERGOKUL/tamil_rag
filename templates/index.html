@@ -12,8 +12,8 @@
         <div id="chat-box">
             <div id="conversation"></div>
         </div>
-        <input type="text" id="user-input" placeholder="Ask me anything...">
-        <button id="send-button">Send</button>
+        <textarea id="user-input" placeholder="Ask me about the content you loaded..." required></textarea>
+        <button id="send-button"><span style="position: relative;bottom: 4px;">↑</span></button>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

@@ -54,7 +54,7 @@ def gradio_predict(inputs):
         chatbot=[],
         api_name="/predict"
     )
-    
+    client.reset_session()
     print("\n\n\n\n",result,"\n\n\n\n")
     print("output\n",result[0][-1][-1])
     return result[0][-1][-1]

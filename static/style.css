@@ -2,35 +2,127 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing:border-box;
 }
 
 .container {
-    max-width: 600px;
+    height:93dvh;
+    max-width: 70vw;
     margin: 0 auto;
-    background: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #chat-box {
-    max-height: 400px;
+    height:80%;
+    width:100%;
     overflow-y: auto;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
     border-radius: 5px;
+    padding-bottom: 10px;
 }
+
+#user-input{
+    width: 90%;
+    max-width: 90%;
+    max-height:7vh;
+    height:7dvh;
+    border-radius: 10vh;
+    border:none;
+    box-shadow: 0px 0px 8px 0px #959595;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 2px;
+    font-size: 1.5em;
+}
+#send-button {
+    height: 7vh;
+    position: relative;
+    bottom: 1%;
+    left: 1%;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    width: 47px;
+    font-size: 2em;
+    padding: 0px;
+    background: #7effa4;
+    box-shadow: 3px 3px 0px 0px #000;
+  }
+
+#send-button span{
+    position: relative;
+    bottom: 4px;
+}
+#send-button:hover{
+    box-shadow: 0px 0px 1px 0px #000;
+    bottom: 5px;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+
+#user-input::-webkit-scrollbar {
+    display: none;
+  }
+
+#conversation{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+  }
 
 .user, .bot {
     margin: 5px 0;
 }
 
 .user {
-    color: blue;
+    background-color: #0000ff2b;
+    max-width: 80%;
+    padding: 10px;
+    align-self: end;
+    border-radius: 10px;
 }
 
 .bot {
-    color: green;
+    max-width: 85%;
+    padding: 10px;
+}
+
+.parent-bot{
+    display: flex;
+    flex-direction: row-reverse;
+    align-self: start;
+    align-items: start;
+    justify-content: left;
+}
+
+.parent-user{
+    display: flex;
+    align-items: start;
+    align-self: end;
+    justify-content: right;
+}
+
+.user-img{
+    width: 35px;
+    height: 35px;
+    background-image: url("/static/images/user.png");
+    background-size: cover;
+    background-position: center;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.bot-img{
+    width: 35px;
+    height: 35px;
+    background-image: url("/static/images/bot.png");
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+    margin-top: 15px;
 }
