@@ -9,7 +9,7 @@ from langchain_core.prompt_values import ChatPromptValue
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from gradio_client import Client
-client = Client("yuntian-deng/ChatGPT4Turbo")
+client = Client("yuntian-deng/ChatGPT4")
 import time
 
 def time_decorator(func):
